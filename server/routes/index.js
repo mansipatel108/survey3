@@ -226,11 +226,11 @@ router.post('/takeSurvey/:id', function (req, res, next) {
             }
         });
     }
-    var shorAns1Arry = [];
-    var shorAns2Arry = [];
-    var shorAns3Arry = [];
-    var shorAns4Arry = [];
-    var shorAns5Arry = [];
+    var shorAns1Arry = req.body.shortAns1Arry; //[];
+    var shorAns2Arry = req.body.shortAns2Arry;
+    var shorAns3Arry = req.body.shortAns3Arry;
+    var shorAns4Arry = req.body.shortAns4Arry;
+    var shorAns5Arry = req.body.shortAns5Arry;
     // loop through the questions, find post value by i and stored into object form then push to array
     for (var i = 0; i < tempSurvey.shortAnswer1.length; i++) {
         shorAns1Arry.push({ shrtAns1: req.body[i] });
