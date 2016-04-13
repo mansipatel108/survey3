@@ -1,0 +1,53 @@
+<% include ../partials/header.ejs %>
+<% include ../partials/navbar.ejs %>
+<main class="container">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <h1>Edit Survey</h1>
+            <form method="post">
+                <fieldset class="form-group">
+                    <label for="name">Name: *</label>
+                    <input name="name" class="form-control" required value="<%= survey.name %>" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="category">Category: *</label>
+                    <input name="category" class="form-control" required value="<%= survey.category %>" />
+                </fieldset>
+               <fieldset class="form-group">
+                    <label for="shortQue1">Short Question 1: *</label>
+                    <input name="shortQue1" class="form-control"  required value="<%= survey.shortQue1 %>" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="shortQue2">Short Question 2: *</label>
+                    <input name="shortQue2" class="form-control"  required value="<%= survey.shortQue2 %>" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="shortQue3">Short Question 3: *</label>
+                    <input name="shortQue3" class="form-control"  required value="<%= survey.shortQue3 %>" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="shortQue4">Short Question: *</label>
+                    <input name="shortQue4" class="form-control"  required value="<%= survey.shortQue4 %>" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="shortQue5">Short Question: *</label>
+                    <input name="shortQue5" class="form-control"  required value="<%= survey.shortQue5 %>" />
+                </fieldset>
+                <fieldset class="form-group text-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <a href="/surveys/delete/<%= survey._id %>" title="Delete" onclick="return confirm('Are you sure you want to delete this?');">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+                    <a href="/surveys">
+                        <input type="button" class="btn btn-warning" value="Cancel"/>
+                    </a>
+                </fieldset>
+                
+                
+                
+            </form>
+        </div>
+    </div>
+
+</main>
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,47 @@
+<% include ../partials/header.ejs %>
+<% include ../partials/navbar.ejs %>
+<main class="container">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <h1>Add Survey</h1>
+            <form method="post">
+                <fieldset class="form-group">
+                    <label for="name">Name: *</label>
+                    <input name="name" class="form-control" required />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="category">Category: *</label>
+                    <input name="category" class="form-control"  required  />
+                </fieldset>
+               <fieldset class="form-group">
+                    <label for="shortQue1">Short Question 1: *</label>
+                    <input name="shortQue1" class="form-control"  required  />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="shortQue2">Short Question 2: *</label>
+                    <input name="shortQue2" class="form-control"  required  />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="shortQue3">Short Question 3: *</label>
+                    <input name="shortQue3" class="form-control"  required  />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="shortQue4">Short Question 4: *</label>
+                    <input name="shortQue4" class="form-control"  required  />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="shortQue5">Short Question 5: *</label>
+                    <input name="shortQue5" class="form-control"  required  />
+                </fieldset>
+                <fieldset class="form-group text-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <a href="/surveys">
+                    <input type="button" class="btn btn-warning" value="Cancel"/>
+                    </a>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</main>
+<% include ../partials/footer.ejs %>
