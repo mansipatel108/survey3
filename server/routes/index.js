@@ -7,8 +7,8 @@ var userModel = require('../models/user');
 var User = userModel.User;
 var surveyModel = require('../models/survey');
 var Survey = surveyModel.Survey;
-var surveyAnswerModel = require('../models/surveyanswer');
-var SurveyAnswer = surveyAnswerModel.SurveyAnswer;
+var answerModel = require('../models/answer');
+var Answer = answerModel.Answer;
 var tempSurvey, tempSurveys;
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -188,119 +188,25 @@ router.get('/', function (req, res, next) {
     });
 });
 //render respondSurvey page
-router.get('/takeSurvey/:id', function (req, res, next) {
-    var id = req.params.id;
-    Survey.findById(id, function (err, Survey) {
-        if (err) {
-            console.log(err);
-            res.end(err);
+router.post('/surveys/response', function (req, res, next) {
+    var answer;
+    console.log("POST: ");
+    console.log(req.body);
+    answer = new Answer({
+        name: req.body.name,
+        shortAnswer: req.body.shortAnswer,
+        // updatedBy: req.body.updatedBy, //here I insert the objectId field
+        updated_at: new Date()
+    });
+    answer.save(function (err) {
+        if (!err) {
+            return console.log("created");
         }
         else {
-            res.render('surveys/respondSurvey', {
-                title: "Take Survey",
-                displayName: req.user ? req.user.displayName : '',
-                survey: Survey,
-            });
-            tempSurvey = Survey; //take the survey object
+            return console.log(err);
         }
     });
-});
-// submit survey answers
-router.post('/takeSurvey/:id', function (req, res, next) {
-    //if survey has been modified , delete all the answer 
-    if (tempSurvey.modified == true) {
-        SurveyAnswer.remove({ surveyId: req.params.id }, function (err) {
-            if (err) {
-                console.log(err);
-                res.end(err);
-            }
-            else {
-                console.log("successfully removed");
-                tempSurvey.modified = false; // bring status back to false
-                tempSurvey.save(function (err) {
-                    if (err)
-                        return Error(err);
-                    else
-                        console.log("modified status changed!");
-                });
-            }
-        });
-    }
-    var shorAns1Arry = req.body.shortAns1Arry; //[];
-    var shorAns2Arry = req.body.shortAns2Arry;
-    var shorAns3Arry = req.body.shortAns3Arry;
-    var shorAns4Arry = req.body.shortAns4Arry;
-    var shorAns5Arry = req.body.shortAns5Arry;
-    // loop through the questions, find post value by i and stored into object form then push to array
-    for (var i = 0; i < tempSurvey.shortAnswer1.length; i++) {
-        shorAns1Arry.push({ shrtAns1: req.body[i] });
-    }
-    for (var i = 0; i < tempSurvey.shortAnswer2.length; i++) {
-        shorAns2Arry.push({ shrtAns2: req.body[i] });
-    }
-    for (var i = 0; i < tempSurvey.shortAnswer3.length; i++) {
-        shorAns3Arry.push({ shrtAns3: req.body[i] });
-    }
-    for (var i = 0; i < tempSurvey.shortAnswer4.length; i++) {
-        shorAns4Arry.push({ shrtAns4: req.body[i] });
-    }
-    for (var i = 0; i < tempSurvey.shortAnswer5.length; i++) {
-        shorAns5Arry.push({ shrtAns5: req.body[i] });
-    }
-    // store object into db
-    SurveyAnswer.create({
-        surveyId: req.params.id,
-        shortAnswer1: shorAns1Arry,
-        shortAnswer2: shorAns2Arry,
-        shortAnswer3: shorAns3Arry,
-        shortAnswer4: shorAns4Arry,
-        shortAnswer5: shorAns5Arry,
-        submitted_at: Date.now()
-    }, function (err, Survey) {
-        if (err) {
-            console.log(err);
-            res.end(err);
-        }
-        else {
-            res.redirect('/'); //after submission
-        }
-    });
-});
-router.get('/takeSurvey/cancel/:id', function (req, res, next) {
-    res.render('index', {
-        title: 'MS Survey',
-        displayName: req.user ? req.user.displayName : '',
-        surveys: tempSurveys
-    });
-});
-/* GET survey list page. */
-router.get('/listSurvey', requireAuth, function (req, res, next) {
-    res.render('surveys/index.ejs', {
-        title: 'My Survey List',
-        displayName: req.user ? req.user.displayName : '',
-        username: req.user ? req.user.username : ''
-    });
-});
-/*  */
-router.get('/listSurvey/create', requireAuth, function (req, res, next) {
-    res.render('surveys/index.ejs', {
-        title: 'My Survey List',
-        displayName: req.user ? req.user.displayName : '',
-        username: req.user ? req.user.username : ''
-    });
-});
-/* Render Login page. */
-router.get('/login', function (req, res, next) {
-    if (!req.user) {
-        res.render('login', {
-            title: 'Login',
-            messages: req.flash('loginMessage'),
-            displayName: req.user ? req.user.displayName : ''
-        });
-    }
-    else {
-        return res.redirect('/listSurvey'); //redirect to listsurvey if logged in
-    }
+    return res.json({ answers: answer });
 });
 module.exports = router;
 

@@ -4,8 +4,10 @@
     <h1>Surveys</h1>
 
     <a href="/surveys/add">Add a New Survey</a>
-    <a href = "/surveys/respondSurvey"> RESPONSE </a>
-
+    
+    <a href="/surveys/response">Response</a>
+    
+    
     <ul class="list-group">
         <% for (var i = 0; i < surveys.length; i++) { %>
             <li class="list-group-item">
@@ -15,6 +17,8 @@
                 </a>
                 <br />
                 category: <%= surveys[i].category %>
+                <br />
+                expired: <%= surveys[i].expired %>
                 <br />
                 Short Question 1: <%= surveys[i].shortQue1 %>
                 <br />
@@ -26,29 +30,7 @@
                 <br />
                 Short Question 5: <%= surveys[i].shortQue5 %>
                 <br />  <br />
-                Multiple Question 1: <%= surveys[i].mulQue %>
-                <br />
-                Multiple Option  1: <%= surveys[i].mulOpt1 %>
-                <br />
-                Multiple Option  2: <%= surveys[i].mulOpt2 %>
-                <br />
-                Multiple Option  3: <%= surveys[i].mulOpt3 %>
-                <br />  <br />
-                Multiple Question 2: <%= surveys[i].mulQue1 %>
-                <br />
-                Multiple Option  1: <%= surveys[i].mulOpta %>
-                <br />
-                Multiple Option  2: <%= surveys[i].mulOptb %>
-                <br />
-                Multiple Option  3: <%= surveys[i].mulOptc %>
-                <br /> <br />
-                Multiple Question 3: <%= surveys[i].mulQue2 %>
-                <br />
-                Multiple Option  1: <%= surveys[i].mulOptd %>
-                <br />
-                Multiple Option  2: <%= surveys[i].mulOpte %>
-                <br />
-                Multiple Option  3: <%= surveys[i].mulOptf %>
+              
             </li>
         <% } %>
     </ul>

@@ -17,6 +17,11 @@ import User = userModel.User;
 import surveyModel = require('./models/survey');
 import Survey = surveyModel.Survey;
 
+//Answer
+//import answerModel = require('./models/answer.js');
+//import Answer = answerModel.Answer;
+
+
 
 import session = require('express-session');
 // flash messages
@@ -33,6 +38,7 @@ var myerror = new CustomError();
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var surveys = require('./routes/surveys');
+//var answers = require('./routes/answers');
 //var articles = require('./routes/articles');
 
 var app = express();
@@ -72,6 +78,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/surveys',surveys);
+//app.use('/answers',answers);
 //app.use('/articles', articles);
 
 // connect to mongodb with mongoose

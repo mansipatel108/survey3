@@ -4,9 +4,12 @@ var router = express.Router();
 
 // db references
 import mongoose = require('mongoose');
-import surveyModel = require('../models/survey');
 
+import surveyModel = require('../models/survey');
 import Survey = surveyModel.Survey;
+
+import answerModel = require('../models/answer');
+import Answer = answerModel.Answer;
 
 /* Utility Function to check if user is authenticated */
 function requireAuth(req:express.Request, res:express.Response, next: any) {
@@ -55,20 +58,7 @@ router.post('/add', requireAuth, (req: express.Request, res: express.Response, n
         shortQue3: req.body.shortQue3,
         shortQue4: req.body.shortQue4,
         shortQue5: req.body.shortQue5,
-        mulQue: req.body.mulQue,
-        mulOpt1: req.body.mulOpt1,
-        mulOpt2: req.body.mulOpt2,
-        mulOpt3: req.body.mulOpt3,
         
-        mulQue1: req.body.mulQue1,
-        mulOpta: req.body.mulOpta,
-        mulOptb: req.body.mulOptb,
-        mulOptc: req.body.mulOptc,
-       
-       mulQue2: req.body.mulQue2,
-        mulOptd: req.body.mulOptd,
-        mulOpte: req.body.mulOpte,
-        mulOptf: req.body.mulOptf,
     }, (error, User) => {
         // did we get back an error or valid Users object?
         if (error) {
@@ -118,19 +108,7 @@ router.post('/:id', requireAuth, (req: express.Request, res: express.Response, n
        shortQue3: req.body.shortQue3,
        shortQue4: req.body.shortQue4,
        shortQue5: req.body.shortQue5,
-       mulQue: req.body.mulQue,
-        mulOpt1: req.body.mulOpt1,
-        mulOpt2: req.body.mulOpt2,
-        mulOpt3: req.body.mulOpt3,
-        mulQue1: req.body.mulQue1,
-        mulOpta: req.body.mulOpta,
-        mulOptb: req.body.mulOptb,
-        mulOptc: req.body.mulOptc,
-        mulQue2: req.body.mulQue2,
-        mulOptd: req.body.mulOptd,
-        mulOpte: req.body.mulOpte,
-        mulOptf: req.body.mulOptf,
-        
+      
     });
     
     
@@ -168,8 +146,13 @@ router.get('/delete/:id', requireAuth, (req: express.Request, res: express.Respo
 });
 
 
-/* -------------------------------------------------------------------------------------------------------------------- */
 
+router.get('/response', (req: express.Request, res: express.Response, next: any) => {
+    res.render('surveys/response', {
+        title: 'Add a New User',
+        displayName: req.user ? req.user.displayName : ''
+    });
+});
 
 // make this public
 module.exports = router;

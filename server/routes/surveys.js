@@ -46,18 +46,6 @@ router.post('/add', requireAuth, function (req, res, next) {
         shortQue3: req.body.shortQue3,
         shortQue4: req.body.shortQue4,
         shortQue5: req.body.shortQue5,
-        mulQue: req.body.mulQue,
-        mulOpt1: req.body.mulOpt1,
-        mulOpt2: req.body.mulOpt2,
-        mulOpt3: req.body.mulOpt3,
-        mulQue1: req.body.mulQue1,
-        mulOpta: req.body.mulOpta,
-        mulOptb: req.body.mulOptb,
-        mulOptc: req.body.mulOptc,
-        mulQue2: req.body.mulQue2,
-        mulOptd: req.body.mulOptd,
-        mulOpte: req.body.mulOpte,
-        mulOptf: req.body.mulOptf,
     }, function (error, User) {
         // did we get back an error or valid Users object?
         if (error) {
@@ -101,18 +89,6 @@ router.post('/:id', requireAuth, function (req, res, next) {
         shortQue3: req.body.shortQue3,
         shortQue4: req.body.shortQue4,
         shortQue5: req.body.shortQue5,
-        mulQue: req.body.mulQue,
-        mulOpt1: req.body.mulOpt1,
-        mulOpt2: req.body.mulOpt2,
-        mulOpt3: req.body.mulOpt3,
-        mulQue1: req.body.mulQue1,
-        mulOpta: req.body.mulOpta,
-        mulOptb: req.body.mulOptb,
-        mulOptc: req.body.mulOptc,
-        mulQue2: req.body.mulQue2,
-        mulOptd: req.body.mulOptd,
-        mulOpte: req.body.mulOpte,
-        mulOptf: req.body.mulOptf,
     });
     // run the update using mongoose and our model
     Survey.update({ _id: id }, survey, function (error) {
@@ -142,7 +118,12 @@ router.get('/delete/:id', requireAuth, function (req, res, next) {
         }
     });
 });
-/* -------------------------------------------------------------------------------------------------------------------- */
+router.get('/response', function (req, res, next) {
+    res.render('surveys/response', {
+        title: 'Add a New User',
+        displayName: req.user ? req.user.displayName : ''
+    });
+});
 // make this public
 module.exports = router;
 
